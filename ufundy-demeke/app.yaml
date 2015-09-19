@@ -6,7 +6,8 @@ threadsafe: yes
 
 handlers:
 - url: /favicon\.ico
-  static_files: favicon.ico
+  mime_type: image/png
+  static_files: static/favicon.ico
   upload: static/favicon\.ico
 
 - url: .*
@@ -15,3 +16,5 @@ handlers:
 libraries:
 - name: webapp2
   version: "2.5.2"
+- name: "jinja2"
+  version: "2.6"

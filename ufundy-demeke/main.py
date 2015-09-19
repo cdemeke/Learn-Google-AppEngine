@@ -14,11 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import os
+
 import webapp2
+from webapp2_extras import routes
 
 from ufundy.public import public_handlers
 
-app = webapp2.WSGIApplication([
-    ('/', public_handlers.MainHandler),
+DEBUG = os.environ.get('SERVER_SOFTWARE', '').startswith('Dev')
+
+webapp2_config = {}
+
+webapp2_config['webapp2_extras.sessions'] = {
+    'secret_key': 'enterasecretkey',
+}
+
+
+app = webapp2.WSGIApplication(
+    [
+    webapp2.Route(r'/', handler = public_handlers.HomeHandler, name = 'home'),
     ('/hello', public_handlers.MainHandler)
-], debug=True)
+    ],
+    config=webapp2_config, debug=DEBUG)
